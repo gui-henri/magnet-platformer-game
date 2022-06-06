@@ -52,7 +52,7 @@ shape = SubResource( 2 )
 [node name="MagnetDetectionArea" type="CollisionShape2D" parent="Player/MagnetArea"]
 shape = SubResource( 3 )
 
-[node name="Magnet" type="StaticBody2D" parent="."]
+[node name="Magnet" type="StaticBody2D" parent="." groups=["Magnet"]]
 position = Vector2( 60, 83 )
 __meta__ = {
 "_edit_group_": true
@@ -76,3 +76,15 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Ground2"]
 texture = ExtResource( 2 )
+
+[node name="Magnet2" type="StaticBody2D" parent="." groups=["Magnet"]]
+position = Vector2( 110, 83 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Hitbox" type="CollisionShape2D" parent="Magnet2"]
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="Magnet2"]
+texture = ExtResource( 4 )

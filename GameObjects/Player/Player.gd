@@ -43,15 +43,15 @@ func proccess_gravity(delta):
 
 func proccess_magnet_force():
 	if Input.is_action_pressed("magnet"):
-		var bodies = magnet_area.get_overlapping_bodies()
+		var magnets = get_tree().get_nodes_in_group("Magnet")
 
-		for body in bodies:
-			if body.name == "Magnet":
+		for magnet in magnets:
+			if magnet_area.overlaps_body(magnet):
 				
-				var body_position = body.get_global_position()
+				var magnet_position = magnet.get_global_position()
 				var player_position = get_global_position()
 
-				var magnet_force_direction = body_position - player_position
+				var magnet_force_direction = magnet_position - player_position
 
 				motion += magnet_force_direction.normalized() * 10
 
