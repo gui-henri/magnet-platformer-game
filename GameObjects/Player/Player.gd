@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 # Child Nodes
 
+onready var collision_area = $Hitbox
 onready var magnet_area = $MagnetArea
 
 # Member variables
@@ -55,9 +56,8 @@ func proccess_magnet_force():
 
 				motion += magnet_force_direction.normalized() * 10
 
-				if motion.y < -150:
-					motion.y = -150
+				if motion.y < -120:
+					motion.y = -120
 				
-				if motion.y > 150:
-					motion.y = 150
-				
+				if motion.y > 120:
+					motion.y = 120
