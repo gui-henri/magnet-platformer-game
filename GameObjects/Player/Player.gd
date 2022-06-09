@@ -12,6 +12,7 @@ export(float) var GRAVITY
 export(int) var JUMP_FORCE
 
 var motion = Vector2.ZERO
+var momemtum = 0
 
 func _physics_process(delta):
 
@@ -30,14 +31,15 @@ func proccess_jump_input():
 		if Input.is_action_just_pressed("ui_accept"):
 			motion.y -= JUMP_FORCE
 		
-		if Input.is_action_just_released("ui_accept"):
-			if motion.y < 0:
-				motion.y = 0
-				motion.y -= JUMP_FORCE/2
-	
+	if Input.is_action_just_released("ui_accept"):
+		if motion.y < -JUMP_FORCE/2:
+			motion.y = 0
+			motion.y -= JUMP_FORCE/2
+			
 func proccess_move_input():
 	var input_direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	motion.x = input_direction * HORIZONTAL_SPEED
+	motion.x = lerp(motion.x, (input_direction * HORIZONTAL_SPEED), 0.3)
+	
 
 func proccess_gravity(delta):
 	motion.y += GRAVITY * delta
@@ -56,8 +58,8 @@ func proccess_magnet_force():
 
 				motion += magnet_force_direction.normalized() * 10
 
-				if motion.y < -120:
-					motion.y = -120
+				if motion.y < -130:
+					motion.y = -130
 				
-				if motion.y > 120:
-					motion.y = 120
+				if motion.y > 130:
+					motion.y = 130
